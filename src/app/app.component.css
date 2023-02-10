@@ -1,0 +1,14 @@
+.red {
+    color: red;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+a {
+    text-decoration: none;
+    font-size: large;
+}

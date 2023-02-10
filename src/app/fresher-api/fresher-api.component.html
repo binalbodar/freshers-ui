@@ -1,0 +1,89 @@
+<div>
+    <form [formGroup]="loginForm" class="container">
+        <label style="font-size: large; font-weight: 700;">UserId :</label>
+        <input type="text" name="user_id" placeholder="Enter Your User Id" style="margin-left: 23px;" /><br>
+
+        <label style="font-size: large; font-weight: 700;">Pass :</label>
+        <input type="text" name="pass" placeholder="Enter Your Pass" style="margin-left: 40px;" /><br>
+
+        <label style="font-size: large; font-weight: 700;">Cat :</label>
+        <input type="text" name="cat" placeholder="Enter Your Cat" style="margin-left: 48px;" /><br>
+
+        <label style="font-size: large; font-weight: 700;">Mail :</label>
+        <input type="text" name="mail" placeholder="Enter Your Mail" style="margin-left: 40px;" /><br>
+
+        <label style="font-size: large; font-weight: 700;">CheckBox :</label>
+        <input type="checkbox" name="checkbox" placeholder="Enter Your Checkbox" style="margin-left: 10px;"
+            class="checkbox" /><br>
+
+        <button name="button" id="submit" type="button" value="Submit" (click)="onSubmit()" style="cursor:pointer;"
+            class="btn btn-primary">Submit</button>
+    </form>
+
+    <mat-table #table [dataSource]="dataSource">
+
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- user_id Column -->
+        <ng-container matColumnDef="user_id">
+            <mat-header-cell *matHeaderCellDef> USER_ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{user.user_id}} </mat-cell>
+        </ng-container>
+
+        <!-- pass Column -->
+        <ng-container matColumnDef="pass">
+            <mat-header-cell *matHeaderCellDef> PASS </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{user.pass}} </mat-cell>
+        </ng-container>
+
+        <!-- cat Column -->
+        <ng-container matColumnDef="cat">
+            <mat-header-cell *matHeaderCellDef> CAT </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{user.cat}} </mat-cell>
+        </ng-container>
+
+        <!-- mail Column -->
+        <ng-container matColumnDef="mail">
+            <mat-header-cell *matHeaderCellDef> MAIL </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{user.mail}} </mat-cell>
+        </ng-container>
+
+        <!-- checkbox Column -->
+        <ng-container matColumnDef="checkbox">
+            <mat-header-cell *matHeaderCellDef> CHECKBOX </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{user.checkbox}} </mat-cell>
+        </ng-container>
+
+        <!-- Action Column -->
+        <ng-container matColumnDef="action">
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <!-- <table mat-table class="table">
+        <thead>
+            <th>USER_ID</th>
+            <th>PASS</th>
+            <th>CAT</th>
+            <th>MAIL</th>
+            <th>CHECKBOX</th>
+            <th>Action</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of userData">
+                <td>{{ user.user_id }}</td>
+                <td>{{ user.pass }}</td>
+                <td>{{ user.cat }}</td>
+                <td>{{ user.mail }}</td>
+                <td>{{ user.checkbox }}</td>
+                <td>
+                    <button type="button" (click)="deletePost()" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table> -->
+</div>

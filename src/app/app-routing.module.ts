@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
-const routes: Routes = [
-];
+import { FresherApiComponent } from './fresher-api/fresher-api.component';
 
+const routes: Routes = [
+  { path: '', component: FresherApiComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
