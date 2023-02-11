@@ -19,6 +19,10 @@ export class FreshersService {
     })
   }
 
+  getUsers(){
+    return this.httpClient.get(this.apiURL+ 'UserMast/UserMastFill');
+  }
+
   getAll(): Observable<any> {
     return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill','')
       .pipe(

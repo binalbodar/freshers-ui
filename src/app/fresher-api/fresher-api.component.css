@@ -9,13 +9,16 @@ input {
     border-radius: 5px;
 }
 
-table {
-    margin-top: 20px;
-}
-
 .mat-table {
     overflow: auto;
     max-height: 500px;
+    margin-top: 20px;
+}
+
+.mat-header-cell{
+    font-size: medium;
+    color: black;
+    margin-left: 20px;
 }
 
 /* .checkbox{

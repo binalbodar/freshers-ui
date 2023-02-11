@@ -9,20 +9,14 @@ import { FreshersService } from '../services/freshers.service'
 })
 export class FresherApiComponent implements OnInit {
 
-  user_id: string;
-  pass: string;
-  cat: string;
-  mail:string;
-  checkbox:string;
-
   constructor(private fresherserve: FreshersService) { }
 
   userData: any = [];
 
   ngOnInit() {
-    this.fresherserve.getAll().subscribe((data: any) => {
-      this.userData = data
-    })
+    this.fresherserve.getUsers().subscribe(response => {
+      this.userData = response;
+    });
   }
 
   loginForm = new FormGroup({
@@ -33,20 +27,34 @@ export class FresherApiComponent implements OnInit {
     checkbox: new FormControl('', [Validators.required]),
   })
 
+  edit: any = '';
+
   onSubmit() {
-    // debugger
-    let value = this.loginForm.value;
-    this.user.push(value);
-    console.log(value);
-    this.clearForm();
+    let value = this.loginForm.value
+    if (this.edit !== '') {
+      this.user[this.edit] = { task: value.task, date: value.date };
+      this.edit = '';
+      this.clearForm();
+    }
+    else {
+      this.user.push(value);
+      this.clearForm();
+    }
   }
+  // onSubmit() {
+  //   debugger
+  //   let value = this.loginForm.value;
+  //   this.user.push(value);
+  //   console.log(value);
+  //   this.clearForm();
+  // }
 
   clearForm() {
     this.loginForm.reset();
   };
 
   user: any = []
-  displayedColumns: string[] = ['user_id', 'pass', 'cat', 'mail', 'checkbox'];
+  displayedColumns: string[] = ['user_id', 'pass', 'cat', 'mail', 'checkbox', 'action'];
   dataSource = this.user;
 
 }
