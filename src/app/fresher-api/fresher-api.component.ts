@@ -9,48 +9,42 @@ import { FreshersService } from '../services/freshers.service'
 })
 export class FresherApiComponent implements OnInit {
 
-  constructor(private fresherserve: FreshersService) { }
-
   userData: any = [];
 
+  constructor(private fresherserve: FreshersService) { }
+
   ngOnInit() {
-    this.fresherserve.getUsers().subscribe(response => {
-      this.userData = response;
+    this.fresherserve.getUsers().subscribe((userData) => {
+      this.userData = userData;
     });
   }
 
-  loginForm = new FormGroup({
+  login = new FormGroup({
     user_id: new FormControl('', [Validators.required]),
     pass: new FormControl('', [Validators.required]),
     cat: new FormControl('', [Validators.required]),
-    mail: new FormControl('', [Validators.required]),
+    mail: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     checkbox: new FormControl('', [Validators.required]),
   })
 
-  edit: any = '';
+  // edit: any = '';
 
   onSubmit() {
-    let value = this.loginForm.value
-    if (this.edit !== '') {
-      this.user[this.edit] = { task: value.task, date: value.date };
-      this.edit = '';
-      this.clearForm();
-    }
-    else {
-      this.user.push(value);
-      this.clearForm();
-    }
+    let value = this.login.value
+    this.userData.push(value);
+    this.clearForm();
   }
+
   // onSubmit() {
   //   debugger
-  //   let value = this.loginForm.value;
+  //   let value = this.login.value;
   //   this.user.push(value);
   //   console.log(value);
   //   this.clearForm();
   // }
 
   clearForm() {
-    this.loginForm.reset();
+    this.login.reset();
   };
 
   user: any = []
@@ -60,9 +54,9 @@ export class FresherApiComponent implements OnInit {
 }
 
 class userData {
-  user_id: string | undefined;
-  pass: string | undefined;
-  cat: string | undefined;
-  mail: string | undefined;
-  checkbox: string | undefined;
+  user_id: string;
+  pass: string;
+  cat: string;
+  mail: string;
+  checkbox: string;
 }

@@ -1,22 +1,33 @@
 <div>
-    <form [formGroup]="loginForm" class="container">
+    <form [formGroup]="login" class="container" name="MyForm">
         <label style="font-size: large; font-weight: 700;">UserId :</label>
-        <input type="text" name="user_id" placeholder="Enter Your User Id" style="margin-left: 23px;" /><br>
+        <input type="text" name="user_id" placeholder="Enter Your User Id" style="margin-left: 23px;" />
+        <span class="error" ng-show="MyForm.UserId.$dirty && MyForm.UserId.$error.required"></span><br>
 
         <label style="font-size: large; font-weight: 700;">Pass :</label>
-        <input type="text" name="pass" placeholder="Enter Your Pass" style="margin-left: 40px;" /><br>
+        <input type="text" name="pass" placeholder="Enter Your Pass" style="margin-left: 40px;" />
+        <span class="error" ng-show="MyForm.Pass.$dirty && MyForm.Pass.$error.required"></span><br>
 
         <label style="font-size: large; font-weight: 700;">Cat :</label>
-        <input type="text" name="cat" placeholder="Enter Your Cat" style="margin-left: 48px;" /><br>
+        <input type="text" name="cat" placeholder="Enter Your Cat" style="margin-left: 48px;" />
+        <span class="error" ng-show="MyForm.Cat.$dirty && MyForm.Cat.$error.required"></span><br>
 
         <label style="font-size: large; font-weight: 700;">Mail :</label>
-        <input type="text" name="mail" placeholder="Enter Your Mail" style="margin-left: 40px;" /><br>
+        <input type="text" placeholder="Enter Your Mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email"
+            name="email" ngModel #emailref="ngModel" style="margin-left: 38px;">
+        <div *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)" class="alert alert-danger">
+            <div [hidden]="!emailref.errors?.pattern">
+                Invalid pattern
+            </div>
+        </div><br>
+        <!-- <span class="error" ng-show="MyForm.Mail.$dirty && MyForm.Mail.$error.required"></span> -->
 
         <label style="font-size: large; font-weight: 700;">CheckBox :</label>
         <input type="checkbox" name="checkbox" placeholder="Enter Your Checkbox" style="margin-left: 10px;"
-            class="checkbox" /><br>
+            class="checkbox" />
+        <span class="error" ng-show="MyForm.CheckBox.$dirty && MyForm.CheckBox.$error.required"></span><br>
 
-        <button name="button" id="submit" type="button" value="Submit" (click)="onSubmit()" style="cursor:pointer;"
+        <button name="button" id="submit" type="submit" value="Submit" (click)="onSubmit()" style="cursor:pointer;"
             class="btn btn-primary">Submit</button>
     </form>
 
@@ -28,31 +39,31 @@
         <!-- user_id Column -->
         <ng-container matColumnDef="user_id">
             <mat-header-cell *matHeaderCellDef> USER_ID </mat-header-cell>
-            <mat-cell *matCellDef="let user"> {{user.user_id}} </mat-cell>
+            <mat-cell *matCellDef="let user of userData"> {{user.user_id}} </mat-cell>
         </ng-container>
 
         <!-- pass Column -->
         <ng-container matColumnDef="pass">
             <mat-header-cell *matHeaderCellDef> PASS </mat-header-cell>
-            <mat-cell *matCellDef="let user"> {{user.pass}} </mat-cell>
+            <mat-cell *matCellDef="let user of userData"> {{user.pass}} </mat-cell>
         </ng-container>
 
         <!-- cat Column -->
         <ng-container matColumnDef="cat">
             <mat-header-cell *matHeaderCellDef> CAT </mat-header-cell>
-            <mat-cell *matCellDef="let user"> {{user.cat}} </mat-cell>
+            <mat-cell *matCellDef="let user of userData"> {{user.cat}} </mat-cell>
         </ng-container>
 
         <!-- mail Column -->
         <ng-container matColumnDef="mail">
             <mat-header-cell *matHeaderCellDef> MAIL </mat-header-cell>
-            <mat-cell *matCellDef="let user"> {{user.mail}} </mat-cell>
+            <mat-cell *matCellDef="let user of userData"> {{user.mail}} </mat-cell>
         </ng-container>
 
         <!-- checkbox Column -->
         <ng-container matColumnDef="checkbox">
             <mat-header-cell *matHeaderCellDef> CHECKBOX </mat-header-cell>
-            <mat-cell *matCellDef="let user"> {{user.checkbox}} </mat-cell>
+            <mat-cell *matCellDef="let user of userData"> {{user.checkbox}} </mat-cell>
         </ng-container>
 
         <!-- Action Column -->
