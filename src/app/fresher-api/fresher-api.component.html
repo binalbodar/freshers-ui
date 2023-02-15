@@ -1,81 +1,103 @@
 <div>
-    <form [formGroup]="login" class="container" name="MyForm">
-        <label style="font-size: large; font-weight: 700;">UserId :</label>
-        <input type="text" name="user_id" placeholder="Enter Your User Id" style="margin-left: 23px;" />
-        <span class="error" ng-show="MyForm.UserId.$dirty && MyForm.UserId.$error.required"></span><br>
-
-        <label style="font-size: large; font-weight: 700;">Pass :</label>
-        <input type="text" name="pass" placeholder="Enter Your Pass" style="margin-left: 40px;" />
-        <span class="error" ng-show="MyForm.Pass.$dirty && MyForm.Pass.$error.required"></span><br>
-
-        <label style="font-size: large; font-weight: 700;">Cat :</label>
-        <input type="text" name="cat" placeholder="Enter Your Cat" style="margin-left: 48px;" />
-        <span class="error" ng-show="MyForm.Cat.$dirty && MyForm.Cat.$error.required"></span><br>
-
-        <label style="font-size: large; font-weight: 700;">Mail :</label>
-        <input type="text" placeholder="Enter Your Mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email"
-            name="email" ngModel #emailref="ngModel" style="margin-left: 38px;">
-        <div *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)" class="alert alert-danger">
-            <div [hidden]="!emailref.errors?.pattern">
-                Invalid pattern
+    <form [formGroup]="loginForm" class="container" novalidate>
+        <label style="font-size: large; font-weight: 700;">UserId <span style="margin-left: 28px;">:-</span></label>
+        <input type="text" name="user_id" placeholder="Enter Your User Id" style="margin-left: 16px;"
+            formControlName="user_id" />
+        <div *ngIf="loginForm.controls['user_id'].invalid && loginForm.controls['user_id'].touched"
+            class="alert alert-danger">
+            <div *ngIf="loginForm.controls['user_id'].errors.required">
+                UserId is required.
             </div>
         </div><br>
-        <!-- <span class="error" ng-show="MyForm.Mail.$dirty && MyForm.Mail.$error.required"></span> -->
 
-        <label style="font-size: large; font-weight: 700;">CheckBox :</label>
+        <label style="font-size: large; font-weight: 700;">Pass <span style="margin-left: 46px;">:-</span></label>
+        <input type="text" name="pass" placeholder="Enter Your Pass" style="margin-left: 18px;"
+            formControlName="pass" />
+        <div *ngIf="loginForm.controls['pass'].invalid && loginForm.controls['pass'].touched"
+            class="alert alert-danger">
+            <div *ngIf="loginForm.controls['pass'].errors.required">
+                Pass is required.
+            </div>
+        </div><br>
+
+        <label style="font-size: large; font-weight: 700;">Cat <span style="margin-left: 55px;">:-</span></label>
+        <input type="text" name="cat" placeholder="Enter Your Cat" style="margin-left: 18px;" formControlName="cat" />
+        <div *ngIf="loginForm.controls['cat'].invalid && loginForm.controls['cat'].touched" class="alert alert-danger">
+            <div *ngIf="loginForm.controls['cat'].errors.required">
+                Cat is required.
+            </div>
+        </div><br>
+
+        <label style="font-size: large; font-weight: 700;">Mail <span style="margin-left: 45px;">:-</span></label>
+        <input type="text" name="mail" placeholder="Enter Your Mail" style="margin-left: 18px;"
+            formControlName="mail" />
+        <div *ngIf="loginForm.controls['mail'].invalid && loginForm.controls['mail'].touched"
+            class="alert alert-danger">
+            <div *ngIf="loginForm.controls['mail'].errors.required">
+                Mail is required.
+            </div>
+            <div *ngIf="loginForm.controls['mail'].invalid && loginForm.controls['mail'].touched"
+                class="alert alert-danger">Please enter a valid mail.</div>
+        </div><br>
+
+        <label style="font-size: large; font-weight: 700;">CheckBox :-</label>
         <input type="checkbox" name="checkbox" placeholder="Enter Your Checkbox" style="margin-left: 10px;"
-            class="checkbox" />
-        <span class="error" ng-show="MyForm.CheckBox.$dirty && MyForm.CheckBox.$error.required"></span><br>
+            class="checkbox" formControlName="checkbox" />
+        <div *ngIf="loginForm.controls['checkbox'].invalid && loginForm.controls['checkbox'].touched"
+            class="alert alert-danger">
+            <div *ngIf="loginForm.controls['checkbox'].errors.required">
+                Checkbox is required.
+            </div>
+        </div><br>
 
-        <button name="button" id="submit" type="submit" value="Submit" (click)="onSubmit()" style="cursor:pointer;"
-            class="btn btn-primary">Submit</button>
+        <button name="button" id="submit" type="button" value="Submit" (click)="onSubmit()" style="cursor:pointer;"
+            class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
     </form>
 
-    <mat-table #table [dataSource]="dataSource">
+    <mat-table #table [dataSource]="userData">
 
-        <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
+        <!--- Note that these columns can be defined in any order. The actual rendered columns are set as a property on the row definition" -->
 
         <!-- user_id Column -->
         <ng-container matColumnDef="user_id">
-            <mat-header-cell *matHeaderCellDef> USER_ID </mat-header-cell>
-            <mat-cell *matCellDef="let user of userData"> {{user.user_id}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> User_id </mat-header-cell>
+            <mat-cell *matCellDef="let userData"> {{userData.USER_ID}} </mat-cell>
         </ng-container>
 
         <!-- pass Column -->
         <ng-container matColumnDef="pass">
-            <mat-header-cell *matHeaderCellDef> PASS </mat-header-cell>
-            <mat-cell *matCellDef="let user of userData"> {{user.pass}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Pass </mat-header-cell>
+            <mat-cell *matCellDef="let userData"> {{userData.PASS}} </mat-cell>
         </ng-container>
 
         <!-- cat Column -->
         <ng-container matColumnDef="cat">
-            <mat-header-cell *matHeaderCellDef> CAT </mat-header-cell>
-            <mat-cell *matCellDef="let user of userData"> {{user.cat}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Cat </mat-header-cell>
+            <mat-cell *matCellDef="let userData"> {{userData.CAT}} </mat-cell>
         </ng-container>
 
         <!-- mail Column -->
         <ng-container matColumnDef="mail">
-            <mat-header-cell *matHeaderCellDef> MAIL </mat-header-cell>
-            <mat-cell *matCellDef="let user of userData"> {{user.mail}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Mail </mat-header-cell>
+            <mat-cell *matCellDef="let userData"> {{userData.MAIL}} </mat-cell>
         </ng-container>
 
         <!-- checkbox Column -->
         <ng-container matColumnDef="checkbox">
-            <mat-header-cell *matHeaderCellDef> CHECKBOX </mat-header-cell>
-            <mat-cell *matCellDef="let user of userData"> {{user.checkbox}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef> Checkbox </mat-header-cell>
+            <mat-cell *matCellDef="let userData"> {{userData.CHECKBOX}} </mat-cell>
         </ng-container>
 
         <!-- Action Column -->
         <ng-container matColumnDef="action">
-            <mat-header-cell *matHeaderCellDef> ACTION </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
 
-    <!-- <table mat-table class="table">
+    <!-- <table class="table">
         <thead>
             <th>USER_ID</th>
             <th>PASS</th>

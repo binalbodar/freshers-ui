@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import {environment} from '../../environments/environment'
+import { environment } from '../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +18,11 @@ export class FreshersService {
       'Content-Type': 'application/json'
     })
   }
-
-  getUsers(){
-    return this.httpClient.get(this.apiURL+ 'UserMast/UserMastFill');
-  }
-
   getAll(): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill','')
-      .pipe(
-        catchError(this.errorHandler)
-      )
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill', '');
   }
   addPost(item: any): Observable<any> {
-    return this.httpClient.post<any>(`${this.apiURL}/posts/`, item);
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastSave', item);
   }
 
   delete(item: any) {

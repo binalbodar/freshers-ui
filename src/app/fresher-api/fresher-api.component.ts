@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { FreshersService } from '../services/freshers.service'
 
 @Component({
@@ -9,54 +12,65 @@ import { FreshersService } from '../services/freshers.service'
 })
 export class FresherApiComponent implements OnInit {
 
-  userData: any = [];
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
-  constructor(private fresherserve: FreshersService) { }
+  constructor(private fresherserve: FreshersService) {
+  }
+  userData: any = [];
+  displayedColumns: string[] = ['user_id', 'pass', 'cat', 'mail', 'checkbox', 'action'];
+  dataSource = this.userData;
+
+  res: MatTableDataSource<any>;
 
   ngOnInit() {
-    this.fresherserve.getUsers().subscribe((userData) => {
-      this.userData = userData;
-    });
+    this.fresherserve.getAll().subscribe((res) => {
+      this.res = new MatTableDataSource<any>(res)
+      if (res.success == 1) {
+        this.userData = res.data
+      }
+    })
   }
 
-  login = new FormGroup({
+  loginForm = new FormGroup({
     user_id: new FormControl('', [Validators.required]),
     pass: new FormControl('', [Validators.required]),
     cat: new FormControl('', [Validators.required]),
-    mail: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+    mail: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
     checkbox: new FormControl('', [Validators.required]),
   })
 
   // edit: any = '';
 
   onSubmit() {
-    let value = this.login.value
+    let value = this.loginForm.value
     this.userData.push(value);
     this.clearForm();
   }
 
-  // onSubmit() {
-  //   debugger
-  //   let value = this.login.value;
-  //   this.user.push(value);
-  //   console.log(value);
-  //   this.clearForm();
-  // }
-
   clearForm() {
-    this.login.reset();
+    this.loginForm.reset();
   };
-
-  user: any = []
-  displayedColumns: string[] = ['user_id', 'pass', 'cat', 'mail', 'checkbox', 'action'];
-  dataSource = this.user;
-
 }
 
 class userData {
-  user_id: string;
-  pass: string;
-  cat: string;
-  mail: string;
-  checkbox: string;
+  user_id: string | undefined;
+  pass: string | undefined;
+  cat: string | undefined;
+  mail: string | undefined;
+  checkbox: string | undefined;
 }
+
+// onSubmit() {
+//   debugger
+//   let value = this.loginForm.value
+//   if (this.edit !== '') {
+//     this.userData[this.edit] = { user_id: value.user_id, pass: value.pass, cat: value.cat, mail: value.mail, checkbox: value.checkbox };
+//     this.edit = '';
+//     this.clearForm();
+//   }
+//   else {
+//     this.userData.push(value);
+//     this.clearForm();
+//   }
+// }
