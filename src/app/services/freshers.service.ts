@@ -18,12 +18,13 @@ export class FreshersService {
       'Content-Type': 'application/json'
     })
   }
-  getAll(): Observable<any> {
+  getUser(): Observable<any> {
     return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill', '');
   }
-  addPost(item: any): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastSave', item);
-  }
+
+  // addPost(item: any): Observable<any> {
+  //   return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastSave', item);
+  // }
 
   delete(item: any) {
     return this.httpClient.delete<any>(this.apiURL + '/posts/' + item, this.httpOptions)

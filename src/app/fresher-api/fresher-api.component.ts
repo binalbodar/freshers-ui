@@ -24,7 +24,7 @@ export class FresherApiComponent implements OnInit {
   res: MatTableDataSource<any>;
 
   ngOnInit() {
-    this.fresherserve.getAll().subscribe((res) => {
+    this.fresherserve.getUser().subscribe(res => {
       this.res = new MatTableDataSource<any>(res)
       if (res.success == 1) {
         this.userData = res.data
@@ -54,11 +54,11 @@ export class FresherApiComponent implements OnInit {
 }
 
 class userData {
-  user_id: string | undefined;
-  pass: string | undefined;
-  cat: string | undefined;
-  mail: string | undefined;
-  checkbox: string | undefined;
+  USER_ID: string | undefined;
+  PASS: string | undefined;
+  CAT: string | undefined;
+  MAIL: string | undefined;
+  CHECKBOX: string | undefined;
 }
 
 // onSubmit() {
