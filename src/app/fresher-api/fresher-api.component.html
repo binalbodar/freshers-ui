@@ -1,7 +1,9 @@
-<div>
-    <form [formGroup]="loginForm" class="container" novalidate>
+<div class="container">
+
+    <!-- FORM -->
+    <form [formGroup]="loginForm" novalidate>
         <label style="font-size: large; font-weight: 700;">UserId <span style="margin-left: 28px;">:-</span></label>
-        <input type="text" name="user_id" placeholder="Enter Your User Id" style="margin-left: 16px;"
+        <input type="text" name="user_id" placeholder="Enter Your User Id" style="margin-left: 17px;"
             formControlName="user_id" />
         <div *ngIf="loginForm.controls['user_id'].invalid && loginForm.controls['user_id'].touched"
             class="alert alert-danger">
@@ -28,7 +30,7 @@
             </div>
         </div><br>
 
-        <label style="font-size: large; font-weight: 700;">Mail <span style="margin-left: 45px;">:-</span></label>
+        <label style="font-size: large; font-weight: 700;">Mail <span style="margin-left: 46px;">:-</span></label>
         <input type="text" name="mail" placeholder="Enter Your Mail" style="margin-left: 18px;"
             formControlName="mail" />
         <div *ngIf="loginForm.controls['mail'].invalid && loginForm.controls['mail'].touched"
@@ -36,12 +38,12 @@
             <div *ngIf="loginForm.controls['mail'].errors.required">
                 Mail is required.
             </div>
-            <div *ngIf="loginForm.controls['mail'].invalid && loginForm.controls['mail'].touched"
-                class="alert alert-danger">Please enter a valid mail.</div>
+            <div *ngIf="loginForm.controls['mail'].errors.required" class="alert alert-danger">Please enter a valid
+                mail.</div>
         </div><br>
 
         <label style="font-size: large; font-weight: 700;">CheckBox :-</label>
-        <input type="checkbox" name="checkbox" placeholder="Enter Your Checkbox" style="margin-left: 18px; border: 2px solid black;"
+        <input type="checkbox" name="checkbox" placeholder="Enter Your Checkbox" style="margin-left: 22px;"
             class="checkbox" formControlName="checkbox" />
         <div *ngIf="loginForm.controls['checkbox'].invalid && loginForm.controls['checkbox'].touched"
             class="alert alert-danger">
@@ -54,50 +56,60 @@
             class="btn btn-primary" [disabled]="!loginForm.valid">Submit</button>
     </form>
 
-    <mat-table #table [dataSource]="userData">
-
-        <!--- Note that these columns can be defined in any order. The actual rendered columns are set as a property on the row definition" -->
+    <!-- TABLE -->
+    <table mat-table class="table" [dataSource]="userData" matSort style="border-top: hidden;">
 
         <!-- user_id Column -->
-        <ng-container matColumnDef="user_id">
-            <mat-header-cell *matHeaderCellDef> User_id </mat-header-cell>
-            <mat-cell *matCellDef="let userData"> {{userData.USER_ID}} </mat-cell>
+        <ng-container matColumnDef="USER_ID">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: large; font-weight: 700; color: black; padding-bottom: 15px;"> User_id </th>
+            <td mat-cell *matCellDef="let userData"> {{userData.USER_ID}} </td>
         </ng-container>
 
         <!-- pass Column -->
-        <ng-container matColumnDef="pass">
-            <mat-header-cell *matHeaderCellDef> Pass </mat-header-cell>
-            <mat-cell *matCellDef="let userData"> {{userData.PASS}} </mat-cell>
+        <ng-container matColumnDef="PASS">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: large; font-weight: 700; color: black; padding-right: 33px; padding-bottom: 15px;">
+                Pass </th>
+            <td mat-cell *matCellDef="let userData"> {{userData.PASS}} </td>
         </ng-container>
 
         <!-- cat Column -->
-        <ng-container matColumnDef="cat">
-            <mat-header-cell *matHeaderCellDef> Cat </mat-header-cell>
-            <mat-cell *matCellDef="let userData"> {{userData.CAT}} </mat-cell>
+        <ng-container matColumnDef="CAT">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: large; font-weight: 700; color: black; padding-right: 33px; padding-bottom: 15px;">
+                Cat </th>
+            <td mat-cell *matCellDef="let userData"> {{userData.CAT}} </td>
         </ng-container>
 
         <!-- mail Column -->
-        <ng-container matColumnDef="mail">
-            <mat-header-cell *matHeaderCellDef> Mail </mat-header-cell>
-            <mat-cell *matCellDef="let userData"> {{userData.MAIL}} </mat-cell>
+        <ng-container matColumnDef="MAIL">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: large; font-weight: 700; color: black; padding-right: 33px; padding-bottom: 15px;">
+                Mail </th>
+            <td mat-cell *matCellDef="let userData"> {{userData.MAIL}} </td>
         </ng-container>
 
         <!-- checkbox Column -->
-        <ng-container matColumnDef="checkbox">
-            <mat-header-cell *matHeaderCellDef> Checkbox </mat-header-cell>
-            <mat-cell *matCellDef="let userData"> {{userData.CHECKBOX}} </mat-cell>
+        <ng-container matColumnDef="CHECKBOX">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: large; font-weight: 700; color: black; padding-bottom: 15px;"> Checkbox </th>
+            <td mat-cell *matCellDef="let userData"> {{userData.CHECKBOX}} </td>
         </ng-container>
 
         <!-- Action Column -->
-        <ng-container matColumnDef="action">
-            <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+        <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                style="font-size: large; font-weight: 700; color: black; padding-right: 33px; padding-bottom: 15px;">
+                Action </th>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    </mat-table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
 
-    <!-- <table class="table">
+<!-- <table class="table">
         <thead>
             <th>USER_ID</th>
             <th>PASS</th>
@@ -119,4 +131,3 @@
             </tr>
         </tbody>
     </table> -->
-</div>

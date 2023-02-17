@@ -31,7 +31,9 @@
               "./node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/jquery/dist/jquery.js"
             ]
           },
           "configurations": {

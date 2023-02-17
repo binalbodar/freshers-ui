@@ -17,18 +17,19 @@ export class FresherApiComponent implements OnInit {
 
   constructor(private fresherserve: FreshersService) {
   }
-  userData: any = [];
-  displayedColumns: string[] = ['user_id', 'pass', 'cat', 'mail', 'checkbox', 'action'];
-  dataSource = this.userData;
+  // userData: any = [];
+  displayedColumns: string[] = ['USER_ID', 'PASS', 'CAT', 'MAIL', 'CHECKBOX', 'Action'];
+  // dataSource = this.userData;
 
-  res: MatTableDataSource<any>;
+  userData: MatTableDataSource<any>;
 
   ngOnInit() {
-    this.fresherserve.getUser().subscribe(res => {
-      this.res = new MatTableDataSource<any>(res)
-      if (res.success == 1) {
-        this.userData = res.data
-      }
+    this.fresherserve.getUser().subscribe((res: any) => {
+      this.userData = new MatTableDataSource<any>(res)
+      setTimeout(() => {
+        this.userData.paginator = this.paginator;
+        this.userData.sort = this.sort;
+      }, 100);
     })
   }
 
@@ -40,11 +41,9 @@ export class FresherApiComponent implements OnInit {
     checkbox: new FormControl('', [Validators.required]),
   })
 
-  // edit: any = '';
-
   onSubmit() {
     let value = this.loginForm.value
-    this.userData.push(value);
+    // this.userData.push(value);
     this.clearForm();
   }
 
@@ -53,24 +52,10 @@ export class FresherApiComponent implements OnInit {
   };
 }
 
-class userData {
-  USER_ID: string | undefined;
-  PASS: string | undefined;
-  CAT: string | undefined;
-  MAIL: string | undefined;
-  CHECKBOX: string | undefined;
-}
-
-// onSubmit() {
-//   debugger
-//   let value = this.loginForm.value
-//   if (this.edit !== '') {
-//     this.userData[this.edit] = { user_id: value.user_id, pass: value.pass, cat: value.cat, mail: value.mail, checkbox: value.checkbox };
-//     this.edit = '';
-//     this.clearForm();
-//   }
-//   else {
-//     this.userData.push(value);
-//     this.clearForm();
-//   }
+// class userData {
+//   USER_ID: string | undefined;
+//   PASS: string | undefined;
+//   CAT: string | undefined;
+//   MAIL: string | undefined;
+//   CHECKBOX: string | undefined;
 // }

@@ -9,14 +9,15 @@ input {
     border-radius: 5px;
 }
 
-.mat-table {
-    overflow: auto;
-    max-height: 500px;
-    margin-top: 20px;
+table {
+    margin-top: 45px;
 }
 
-.mat-header-cell {
+.th {
     font-size: medium;
     color: black;
-    margin-left: 20px;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
 }
