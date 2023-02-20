@@ -1,3 +1,8 @@
+*{
+    padding: 0 auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 form,
 label,
 input {
@@ -11,13 +16,25 @@ input {
 
 table {
     margin-top: 45px;
+    width: 100%;
 }
 
-.th {
+th {
     font-size: medium;
     color: black;
 }
 
 input[type=checkbox] {
     transform: scale(1.5);
+}
+
+.mat-paginator {
+    width: 100%;
+}
+.cursor {
+    padding-top: 20px;
+}
+
+.btn-sub{
+    margin-top: 20px;
 }

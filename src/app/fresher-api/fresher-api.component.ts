@@ -13,22 +13,18 @@ import { FreshersService } from '../services/freshers.service'
 export class FresherApiComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: false }) sort: MatSort;
 
   constructor(private fresherserve: FreshersService) {
   }
-  // userData: any = [];
-  displayedColumns: string[] = ['USER_ID', 'PASS', 'CAT', 'MAIL', 'CHECKBOX', 'Action'];
-  // dataSource = this.userData;
+  displayedCol: string[] = ['USER_ID', 'PASS', 'CAT', 'MAIL', 'CHECKBOX', 'Action'];
 
   userData: MatTableDataSource<any>;
 
   ngOnInit() {
     this.fresherserve.getUser().subscribe((res: any) => {
-      this.userData = new MatTableDataSource<any>(res)
+      this.userData = new MatTableDataSource(res.data)
       setTimeout(() => {
         this.userData.paginator = this.paginator;
-        this.userData.sort = this.sort;
       }, 100);
     })
   }
@@ -44,6 +40,8 @@ export class FresherApiComponent implements OnInit {
   onSubmit() {
     let value = this.loginForm.value
     // this.userData.push(value);
+    console.log(value);
+    
     this.clearForm();
   }
 
@@ -51,11 +49,3 @@ export class FresherApiComponent implements OnInit {
     this.loginForm.reset();
   };
 }
-
-// class userData {
-//   USER_ID: string | undefined;
-//   PASS: string | undefined;
-//   CAT: string | undefined;
-//   MAIL: string | undefined;
-//   CHECKBOX: string | undefined;
-// }

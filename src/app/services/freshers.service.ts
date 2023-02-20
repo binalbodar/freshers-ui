@@ -19,19 +19,19 @@ export class FreshersService {
     })
   }
   getUser(): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill', '');
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill','');
   }
 
-  // addPost(item: any): Observable<any> {
-  //   return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastSave', item);
+  addPost(value: any): Observable<any> {
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastSave', value);
+  }
+
+  // delete(item: any) {
+  //   return this.httpClient.delete<any>(this.apiURL + '/posts/' + item, this.httpOptions)
+  //     .pipe(
+  //       catchError(this.errorHandler)
+  //     )
   // }
-
-  delete(item: any) {
-    return this.httpClient.delete<any>(this.apiURL + '/posts/' + item, this.httpOptions)
-      .pipe(
-        catchError(this.errorHandler)
-      )
-  }
 
   errorHandler(error: any): Observable<any> {
     let errorMessage = '';
