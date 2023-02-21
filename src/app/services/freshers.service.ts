@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment'
 
 @Injectable({
@@ -22,16 +21,13 @@ export class FreshersService {
     return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill','');
   }
 
-  addPost(value: any): Observable<any> {
+  addUser(value: any): Observable<any> {
     return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastSave', value);
   }
 
-  // delete(item: any) {
-  //   return this.httpClient.delete<any>(this.apiURL + '/posts/' + item, this.httpOptions)
-  //     .pipe(
-  //       catchError(this.errorHandler)
-  //     )
-  // }
+  delete(value: any) {
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastDelete' + value, this.httpOptions)
+  }
 
   errorHandler(error: any): Observable<any> {
     let errorMessage = '';

@@ -39,13 +39,21 @@ export class FresherApiComponent implements OnInit {
 
   onSubmit() {
     let value = this.loginForm.value
-    // this.userData.push(value);
-    console.log(value);
-    
-    this.clearForm();
+    this.fresherserve.addUser(value).subscribe(()=>{
+      console.log(value);
+      this.userData.data.push(value.data);
+      this.clearForm();
+    })
   }
 
   clearForm() {
     this.loginForm.reset();
   };
+
+  // deleteUser(value: any) {
+  //   this.fresherserve.delete(value).subscribe((res: any) => {
+  //     this.userData = this.userData.filter((res: any) => res.id !== value);
+  //     console.log(res, 'Post Deleted Successfully!');
+  //   })
+  // }
 }

@@ -1,12 +1,13 @@
-*{
+* {
     padding: 0 auto;
     margin: 0 auto;
     box-sizing: border-box;
 }
+
 form,
 label,
 input {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 input {
@@ -31,10 +32,11 @@ input[type=checkbox] {
 .mat-paginator {
     width: 100%;
 }
+
 .cursor {
     padding-top: 20px;
 }
 
-.btn-sub{
+.btn-sub {
     margin-top: 20px;
 }

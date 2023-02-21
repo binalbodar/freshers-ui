@@ -92,7 +92,7 @@
             <ng-container matColumnDef="CHECKBOX">
                 <th mat-header-cell *matHeaderCellDef
                     style="font-size: large; font-weight: 700; color: black; padding-bottom: 15px;">Checkbox</th>
-                <td mat-cell *matCellDef="let element" class="cursor" style="padding-top: 30px;">
+                <td mat-cell *matCellDef="let element" class="cursor" style="padding-top: 30px; padding-left: 40px;">
                     {{ element.CHECKBOX }}
                 </td>
             </ng-container>
@@ -101,7 +101,7 @@
                 <th mat-header-cell *matHeaderCellDef
                     style="font-size: large; font-weight: 700; color: black; padding-bottom: 15px;">Action</th>
                 <td mat-cell *matCellDef="let element" class="cursor" style="padding-bottom: 15px;"><button
-                        type="button" (click)="deletePost()" class="btn btn-danger">Delete</button></td>
+                        type="button" (click)="deleteUser(element.USER_ID)" class="btn btn-danger">Delete</button></td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedCol"></tr>
