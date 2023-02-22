@@ -21,6 +21,10 @@ export class FresherApiComponent implements OnInit {
   userData: MatTableDataSource<any>;
 
   ngOnInit() {
+    this.getUserMast();
+  }
+
+  getUserMast() {
     this.fresherserve.getUser().subscribe((res: any) => {
       this.userData = new MatTableDataSource(res.data)
       setTimeout(() => {
@@ -30,30 +34,37 @@ export class FresherApiComponent implements OnInit {
   }
 
   loginForm = new FormGroup({
-    user_id: new FormControl('', [Validators.required]),
-    pass: new FormControl('', [Validators.required]),
-    cat: new FormControl('', [Validators.required]),
-    mail: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
-    checkbox: new FormControl('', [Validators.required]),
+    USER_ID: new FormControl('', [Validators.required]),
+    PASS: new FormControl('', [Validators.required]),
+    CAT: new FormControl('', [Validators.required]),
+    MAIL: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+    CHECKBOX: new FormControl('', [Validators.required]),
   })
 
   onSubmit() {
-    let value = this.loginForm.value
-    this.fresherserve.addUser(value).subscribe(()=>{
-      console.log(value);
-      this.userData.data.push(value.data);
+    let value = this.loginForm.value;
+    this.fresherserve.addUser(value).subscribe((res: any) => {
+      if (res.success = 1) {
+        this.getUserMast();
+      }
       this.clearForm();
+    })
+  }
+
+  data = {
+    USER_ID: "srfty"
+  }
+  deleteUser(data: any) {
+    this.fresherserve.delete(data).subscribe((res: any) => {
+      console.log(data);
+      
+      if (res.success = 1) {
+        this.getUserMast();
+      }
     })
   }
 
   clearForm() {
     this.loginForm.reset();
   };
-
-  // deleteUser(value: any) {
-  //   this.fresherserve.delete(value).subscribe((res: any) => {
-  //     this.userData = this.userData.filter((res: any) => res.id !== value);
-  //     console.log(res, 'Post Deleted Successfully!');
-  //   })
-  // }
 }

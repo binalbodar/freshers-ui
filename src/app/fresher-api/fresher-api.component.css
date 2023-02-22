@@ -15,6 +15,14 @@ input {
     border-radius: 5px;
 }
 
+.btn-denger {
+    color: red;
+}
+
+.btn-denger:hover {
+    color: red;
+}
+
 table {
     margin-top: 45px;
     width: 100%;

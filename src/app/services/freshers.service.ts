@@ -14,19 +14,19 @@ export class FreshersService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     })
   }
   getUser(): Observable<any> {
-    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill','');
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastFill', '');
   }
 
   addUser(value: any): Observable<any> {
     return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastSave', value);
   }
 
-  delete(value: any) {
-    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastDelete' + value, this.httpOptions)
+  delete(data: any) {
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastDelete', this.httpOptions)
   }
 
   errorHandler(error: any): Observable<any> {
