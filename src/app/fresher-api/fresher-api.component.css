@@ -23,6 +23,14 @@ input {
     color: red;
 }
 
+.btn-primari {
+    color: blue;
+}
+
+.btn-primari:hover {
+    color: blue;
+}
+
 table {
     margin-top: 45px;
     width: 100%;

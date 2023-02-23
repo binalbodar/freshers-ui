@@ -29,6 +29,10 @@ export class FreshersService {
     return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastDelete', data)
   }
 
+  editUser(item: any) {
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastSave', item)
+  }
+
   errorHandler(error: any): Observable<any> {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
