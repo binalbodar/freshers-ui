@@ -51,10 +51,10 @@ export class FresherApiComponent implements OnInit {
     })
   }
 
-  data = {
-    USER_ID: "srfty"
-  }
-  deleteUser(data: any) {
+  deleteUser(value:any) {
+    let data = {
+      USER_ID: value
+    }
     this.fresherserve.delete(data).subscribe((res: any) => {
       console.log(data);
       

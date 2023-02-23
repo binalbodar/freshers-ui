@@ -26,7 +26,7 @@ export class FreshersService {
   }
 
   delete(data: any) {
-    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastDelete', this.httpOptions)
+    return this.httpClient.post<any>(this.apiURL + 'UserMast/UserMastDelete', data)
   }
 
   errorHandler(error: any): Observable<any> {
