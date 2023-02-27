@@ -63,7 +63,10 @@ export class FresherApiComponent implements OnInit {
   }
 
   editUser(value: any) {
-    this.fresherserve.editUser(value).subscribe((res: any) => {
+    let data = {
+      USER_ID: value
+    }
+    this.fresherserve.editUser(data).subscribe((res: any) => {
       if (res.success = 1) {
         this.getUserMast();
       }
